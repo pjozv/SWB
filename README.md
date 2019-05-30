@@ -1,2 +1,2 @@
-# SWBD
+# SWB
 Embedded systems solutions
