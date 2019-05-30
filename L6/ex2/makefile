@@ -1,15 +1,20 @@
 # Main makefile
 CC=g++
 CFLAGS=-c -Wall
+ODIR=obj/
+BDIR=bin/
 
 main: main.o dbgPrint.o
-	$(CC) main.o dbgPrint.o -o main
+	$(CC) $(ODIR)main.o $(ODIR)dbgPrint.o -o $(BDIR)$@
 
 main.o: main.cpp main.h
-	$(CC) $(CFLAGS) main.cpp -o main.o
+	$(CC) $(CFLAGS) $< -o $(ODIR)$@
 
 dbgPrint.o: dbgPrint.cpp dbgPrint.h
-	$(CC) $(CFLAGS) dbgPrint.cpp -o dbgPrint.o
+	$(CC) $(CFLAGS) $< -o $(ODIR)$@
 
+.PHONY: clean
 clean:
-	rm -f ./*.o main
+	rm -f *.o main
+	rm -f obj/*
+	rm -f bin/*
