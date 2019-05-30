@@ -6,7 +6,7 @@ OBJDIR=obj/
 OBJECTS=cw7_dom1.cpp.o sortowanie.o min.o max.o avg.o
 MACROS=src/macros.h
 
-main: $(OBJECTS)
+all: $(OBJECTS)
 	$(CC) $(OBJDIR)cw7_dom1.cpp.o $(OBJDIR)sortowanie.o $(OBJDIR)min.o $(OBJDIR)max.o $(OBJDIR)avg.o -o $@
 
 cw7_dom1.cpp.o: $(SRCDIR)cw7_dom1.cpp
@@ -24,8 +24,6 @@ max.o: $(SRCDIR)max.cpp $(SRCDIR)max.h $(MACROS)
 avg.o: $(SRCDIR)avg.cpp $(SRCDIR)avg.h $(MACROS)
 	$(CC) $(CFLAGS) $< -o $(OBJDIR)$@
 
-
-.PHONY: clean
 clean:
 	rm -f main
 	rm -f obj/*

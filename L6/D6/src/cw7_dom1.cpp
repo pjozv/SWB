@@ -37,9 +37,9 @@ int main() {
 	Quicksort sort;
 	sort.quickSort(tab, 0, TSIZE-1);
 
-	cout << "Najmiejszy element: " << min(tab) << endl;
-	cout << "Największy element: " << max(tab) << endl;
-	cout << "Średnia: " << avg(tab) << endl<<endl;
-
 	print(tab);
+
+	cout << "Min: " << min(tab) << endl;
+	cout << "Max: " << max(tab) << endl;
+	cout << "Average: " << avg(tab) << endl;
 }
