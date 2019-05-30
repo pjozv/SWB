@@ -16,8 +16,8 @@ all: build install
 
 install: $(OUTDIR)/main
 
-$(OUTDIR)/main: |$(OUTDIR)
-	# TODO - FILL ME! Normally you would copy out the executable and resources to destination folder. For exercise sake, copy it out to out dir - remember about checking if it exists.
+$(OUTDIR)/main: $(OBJDIR)/main.o |$(OUTDIR)
+	$(CC) $(FLAGS) -d$(LIBS) $< -o $@
 
 build: $(BINDIR)/main
 
@@ -43,8 +43,8 @@ $(LIBBASEDIR)/%.a:
 .PHONY:clean
 
 clean:
-	# TODO - FILL ME! Add removal of object files and binaries. 
+	rm -f *.o
+	rm -f obj/*
+	rm -f bin/*
 #Run clean for every makefile in subdirectories. && is needed to interpret multiple commands in one line, true - to end the command with "&& true".
 	@$(foreach path,$(LIBDIRS), $(MAKE) clean -C $(LIBBASEDIR)/$(path) &&) true 
-
-	
