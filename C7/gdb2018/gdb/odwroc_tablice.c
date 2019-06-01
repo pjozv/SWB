@@ -1,41 +1,40 @@
 #include <stdio.h>
-#include<math.h>
+#include <math.h>
 
 void wyswietl(int *t, int length) {
-   printf("\n");
-   int i=0;
-   for (int i=0; i<length; i++) {
-      printf("%d ", t[i]);
-   }
+
+	for (int i=0; i<length; i++)
+		printf("%d ", t[i]);
+	printf("\n");
 }
 
-int main ()
+int main()
 {
-    int n=0;
-    printf("Tablice... znajdz wszystkie bledy :)\n");
-    printf("Podaj Dlugosc tablicy od 0 do 100 \n");
-    scanf("%d", &n);
-    
-    int *tablica = new int[n];
-    int i =0;
-    for(int i=0; i<n; i++) {
-      tablica[i]=i;
-    }
-    
-    
-    
-    printf("Aktualna tablica to:  \n");
-    wyswietl(tablica, 5);
-    
-    printf("\n odracamy tabice");
-    
-    for (int i=0; i<n; i++) {
-       int temp = tablica[i];
-       tablica[i] = tablica[n-i-1];
-       tablica[n-i-1] = temp;
-    }
-    
-    printf("Odwrocana tablica to: wszystko ok?: ");
-    wyswietl(tablica, n);
-    return 0;
+	int n, temp, i, j;
+
+	printf("Tablice... znajdz wszystkie bledy :)\n");
+	printf("Podaj dlugosc tablicy od 0 do 100 \n");
+	scanf("%d", &n);
+
+	int *tablica = (int*)malloc(n*sizeof(int));
+
+	for(int i=0; i<n; i++)
+		tablica[i]=i;
+
+	printf("Aktualna tablica to:\n");
+	wyswietl(tablica, n);
+
+	printf("\nOdwracamy tabice\n");
+
+	for (i = 0, j = n-1; i < j; i++, j--) {
+		temp = tablica[i];
+		tablica[i] = tablica[j];
+		tablica[j] = temp;
+	}
+
+	printf("Odwrocona tablica to:\n");
+	wyswietl(tablica, n);
+	free(tablica);
+
+	return 0;
 }
