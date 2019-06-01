@@ -1,58 +1,54 @@
 #include <stdio.h>
-#include<math.h>
+#include <math.h>
 
-int a,b,c,d;
-int delta(int a, int b,int c)
+float delta(float a, float b, float c)
 {
-    return b*b-4*a*c;
+	return b*b-4*a*c;
 }
 
-float e(int a,int  b)
+float jednRozw(float a,float b)
 {
-    return ((-b)/(2*a));
+	return -b/(2*a);
 }
 
-float pierwX1(int  a, int  b, int  delta)
+float pierwX1(float  a, float  b, float  delta)
 {
-    return (-b+sqrt(delta))/(2*a);
+	return (-b+sqrt(delta))/(2*a);
 }
 
-float pierwX2(int  a, int  b, int  delta)
+float pierwX2(float  a, float  b, float  delta)
 {
-    return (-b-sqrt(delta))/(2*a);
+	return (-b-sqrt(delta))/(2*a);
 }
-int xliniowe(int c, int b)
+float rLiniowe(float b, float c)
 {
-    return -c/b;
+	return -c/b;
 }
 
 int main ()
 {
-    printf("Rownanie kwadratowe: a*x*x+b*x+c=0 \n");
-    printf("Podaj a: ");
-    scanf("%d", &a);
-    printf("Podaj b: ");
-    scanf("%d", &b);
-    printf("Podaj c: ");
-    scanf("%d", &c);
-    printf("Podaj a: ");
-    
-    if (delta(a,b,c)<0){
-        printf("Rownanie nie ma rozwiazan \n)");
-    } else if (delta(a,b,c)==0) {
-            printf("Jest tylko jedno rozwiazanie:\n x= %f",e(a,b));
-        printf("\n");
-    } else if (delta(a,b,c)>0) {
-        printf("Sa dwa rozwiazania rowne: \n x1=%f",pierwX1(a,b,delta(a,b,c)));
-        printf("x2=%f, ", pierwX2(a,b,delta(a,b,c)));
-        printf("\n");
-    }
 
-    if (a==0) {
-        printf("X jest rowne: %d \n", xliniowe(c,b));
-    } else {
-        d=delta(a,b,c);
-        printf("Delta rownania wynosi: %d \n", d);
-    }
-    return 0;
+	float a,b,c,d;
+
+	printf("Rownanie kwadratowe: a*x*x+b*x+c=0 \n");
+	printf("Podaj a: ");
+	scanf("%f", &a);
+	printf("Podaj b: ");
+	scanf("%f", &b);
+	printf("Podaj c: ");
+	scanf("%f", &c);
+
+	if(a==0)	
+		printf("x jest rowne: %g\n", rLiniowe(b,c));
+	else {
+		d = delta(a,b,c);
+		printf("Delta rownania wynosi: %g\n", d);
+		if (d < 0)
+			printf("Rownanie nie ma rozwiazan\n");
+		else if (d == 0) 
+			printf("Jest tylko jedno rozwiazanie:\n x = %g\n",jednRozw(a,b));
+		else if (d > 0)
+			printf("Sa dwa rozwiazania rowne:\nx1=%g\nx2=%g\n",pierwX1(a,b,d), pierwX2(a,b,d));
+	}
+	return 0;
 }
