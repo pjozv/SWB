@@ -3,27 +3,20 @@ CC=g++
 CFLAGS=-c -Wall
 SRCDIR=src/
 OBJDIR=obj/
-OBJECTS=cw7_dom1.cpp.o sortowanie.o min.o max.o avg.o
+OBJ := $(patsubst $(SRCDIR)%.cpp,$(OBJDIR)%.o,$(wildcard $(SRCDIR)*.cpp))
 MACROS=src/macros.h
 
-all: $(OBJECTS)
-	$(CC) $(OBJDIR)cw7_dom1.cpp.o $(OBJDIR)sortowanie.o $(OBJDIR)min.o $(OBJDIR)max.o $(OBJDIR)avg.o -o $@
+all: cw7_dom1
 
-cw7_dom1.cpp.o: $(SRCDIR)cw7_dom1.cpp
-	$(CC) $(CFLAGS) $< -o $(OBJDIR)$@
+cw7_dom1: $(OBJ)
+	$(CC) $^ -o $@
+	  
+$(OBJDIR)cw7_dom1.o: $(SRCDIR)cw7_dom1.cpp
+	$(CC) $(CFLAGS) $< -o $@
 
-sortowanie.o:  $(SRCDIR)sortowanie.cpp  $(SRCDIR)sortowanie.h $(MACROS)
-	$(CC) $(CFLAGS) $< -o $(OBJDIR)$@
-
-min.o: $(SRCDIR)min.cpp $(SRCDIR)min.h $(MACROS)
-	$(CC) $(CFLAGS) $< -o $(OBJDIR)$@
-
-max.o: $(SRCDIR)max.cpp $(SRCDIR)max.h $(MACROS)
-	$(CC) $(CFLAGS) $< -o $(OBJDIR)$@
-
-avg.o: $(SRCDIR)avg.cpp $(SRCDIR)avg.h $(MACROS)
-	$(CC) $(CFLAGS) $< -o $(OBJDIR)$@
+$(OBJDIR)%.o:  $(SRCDIR)%.cpp  $(SRCDIR)%.h $(MACROS)
+	$(CC) $(CFLAGS) $< -o $@
 
 clean:
-	rm -f main
+	rm -f cw7_dom1
 	rm -f obj/*
