@@ -1,2 +1,2 @@
 # SWB
-Embedded systems solutions
+Systemy wbudowane 2019
