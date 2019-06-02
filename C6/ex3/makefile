@@ -12,6 +12,8 @@ LIBDIRS:=libPrint
 LIBS:= $(addprefix $(LIBBASEDIR)/, $(LIBDIRS))
 LIBS:= $(addsuffix .a, $(LIBS))
 
+#LIBS=lib/libPrint.a
+
 all: build install
 
 install: $(OUTDIR)/main
@@ -19,9 +21,11 @@ install: $(OUTDIR)/main
 $(OUTDIR)/main: $(OBJDIR)/main.o |$(OUTDIR)
 	$(CC) $(FLAGS) -d$(LIBS) $< -o $@
 
+#Definicje dla preprocesora ustawiane są zazwyczaj za pomocą flagi -Dnazwa_definicji, przekazanej do kompilatora; w ten sposób włącz makra z pliku libPrint.h??
+
 build: $(BINDIR)/main
 
-$(BINDIR)/main: $(OBJDIR)/main.o $(LIBS)
+$(BINDIR)/main: $(OBJDIR)/main.o $(LIBS) |$(BINDIR)
 	$(CC) $^ -o $@
 
 #Before creating any objects (| - order-only prequisities - items on the right of | will be checked before items on the left), be sure that dirs are created.
@@ -43,8 +47,6 @@ $(LIBBASEDIR)/%.a:
 .PHONY:clean
 
 clean:
-	rm -f *.o
-	rm -f obj/*
-	rm -f bin/*
+	rm -f -r obj/ out/ bin/
 #Run clean for every makefile in subdirectories. && is needed to interpret multiple commands in one line, true - to end the command with "&& true".
 	@$(foreach path,$(LIBDIRS), $(MAKE) clean -C $(LIBBASEDIR)/$(path) &&) true 
