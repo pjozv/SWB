@@ -3,18 +3,15 @@ CC=g++
 CFLAGS=-c -Wall
 ODIR=obj/
 BDIR=bin/
+OBJ:=$(patsubst %.cpp,$(ODIR)%.o,$(wildcard *.cpp))
 
-main: main.o dbgPrint.o
-	$(CC) $(ODIR)main.o $(ODIR)dbgPrint.o -o $(BDIR)$@
+$(BDIR)main: $(OBJ)
+	$(CC) $^ -o $@
 
-main.o: main.cpp main.h
-	$(CC) $(CFLAGS) $< -o $(ODIR)$@
-
-dbgPrint.o: dbgPrint.cpp dbgPrint.h
-	$(CC) $(CFLAGS) $< -o $(ODIR)$@
+$(ODIR)%.o: %.cpp %.h
+	$(CC) $(CFLAGS) $< -o $@
 
 .PHONY: clean
 clean:
-	rm -f *.o main
 	rm -f obj/*
 	rm -f bin/*
