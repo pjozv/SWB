@@ -8,6 +8,11 @@ heapproject: heapproject.o heap.o infoelement.o
 %.o: %.cpp %.h
 	$(CC) -pg -g $(CFLAGS) $< -o $@
 
+run_memory_leak: heapproject
+	valgrind  --leak-check=full ./$<
+
+run_callgrind: heapproject
+	valgrind --tool=callgrind ./$<
 
 clean:
-	rm -f ./*.o heapproject
+	rm -f ./*.o heapproject gmon.out

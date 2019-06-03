@@ -4,6 +4,7 @@
  *  Created on: 21-10-2016
  *      Author: wawrzyniakw
  */
+#include <stdlib.h>
 #include "infoelement.h"
 #include "heap.h"
 
@@ -30,11 +31,12 @@ InfoElement* BinaryMinHeap::getMinimum() {
       
       
     InfoElement* result = data[0];
-    for (int i=0; i<data.size()/5; i++) {
+    /*for (int i=0; i<data.size()/5; i++) {
        if (result->time>data[i]->time) {
           result = data[i];
+	printf("priorytet data[0] > data[i]?\n"); 
        }
-    }
+    }*/
     
     return result;
 }
@@ -102,6 +104,12 @@ void BinaryMinHeap::removeMin() {
 	if (isEmpty())
 		return;
 	else {
+		//dodano:
+		InfoElement *del = data[0];
+		del->DeleteElement();
+		delete del;
+		//
+		
 		data[0] = data[data.size() - 1];
 		data.pop_back();
 		if (data.size() > 0)

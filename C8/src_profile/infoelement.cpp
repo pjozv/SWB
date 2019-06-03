@@ -15,7 +15,8 @@ int InfoElement::getTime() {
 }
 
 InfoElement::InfoElement(char *tinfo, int ttime) {
-	info = strdup(tinfo);
+	//info = strdup(tinfo);
+	info = tinfo;
 	time = ttime;
 }
 
@@ -25,7 +26,14 @@ InfoElement::InfoElement() {
 }
 
 InfoElement::InfoElement(const InfoElement &obj) {
-	info = strdup(obj.info);
+	//info = strdup(obj.info);
+	info = obj.info;
 	time = obj.time;
 }
+
+//dodano:
+void InfoElement::DeleteElement() {
+	free(info);
+}
+//
 

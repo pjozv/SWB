@@ -21,6 +21,10 @@ public:
 	InfoElement();
 
 	InfoElement(const InfoElement &obj);
+
+	//dodano:
+	void DeleteElement();
+	//
 };
 
 #endif /* INFOELEMENT_H_ */
