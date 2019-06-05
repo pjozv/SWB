@@ -1,11 +1,11 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-//#include "sortowanie.h"
-//#include "min.h"
-//#include "max.h"
-//#include "avg.h"
-//#include "macros.h"
+#include "sortowanie.h"
+#include "../libs/libswbmath/src/min.h"
+#include "../libs/libswbmath/src/max.h"
+#include "../libs/libswbmath/src/avg.h"
+#include "../libs/libswbmath/src/macros.h"
 
 using namespace std;
 
@@ -34,12 +34,12 @@ int main() {
 	randomize(tab);
 	print(tab);
 
-//	Quicksort sort;
-//	sort.quickSort(tab, 0, TSIZE-1);
+    Quicksort sort;
+	sort.quickSort(tab, 0, TSIZE-1);
 
 	print(tab);
 
-//	cout << "Min: " << min(tab) << endl;
-//	cout << "Max: " << max(tab) << endl;
-//	cout << "Average: " << avg(tab) << endl;
+	cout << "Min: " << min(tab) << endl;
+	cout << "Max: " << max(tab) << endl;
+	cout << "Average: " << avg(tab) << endl;
 }

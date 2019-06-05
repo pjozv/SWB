@@ -5,31 +5,29 @@ OBJDIR:=obj
 BINDIR:=bin
 SRCDIR:=src
 OUTDIR:=out
+OBJ := $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(wildcard $(SRCDIR)/*.cpp))
 
-LIBBASEDIR:=lib
+LIBBASEDIR:=libs
 # Thanks to the structure of this makefile, we just need to add lib names in the line below; All the rest will be handled by subsequent makefiles and scripts.
-LIBDIRS:=swbmath
+LIBDIRS:=libswbmath
 LIBS:= $(addprefix $(LIBBASEDIR)/, $(LIBDIRS))
 LIBS:= $(addsuffix .a, $(LIBS))
 
-#LIBS=lib/swbmath.a
+#LIBS=lib/libswbmath.a
 
 all: build install
 
-install: $(OUTDIR)/main
+install: $(BINDIR)/cw7_dom1
 
-$(OUTDIR)/main: $(OBJDIR)/main.o |$(OUTDIR)
-	$(CC) $(FLAGS) -d$(LIBS) $< -o $@
+$(BINDIR)/cw7_dom1: $(OBJ) $(LIBS) |$(BINDIR)
+	$(CC) $(OBJ) -static -Llibs/ -lswbmath -o $@
 
-#Definicje dla preprocesora ustawiane są zazwyczaj za pomocą flagi -Dnazwa_definicji, przekazanej do kompilatora; w ten sposób włącz makra z pliku libPrint.h??
+build: $(LIBS) $(OBJ)
 
-build: $(BINDIR)/cw7_dom1
+$(OBJDIR)/sortowanie.o: $(SRCDIR)/sortowanie.cpp $(SRCDIR)/sortowanie.h |$(OBJDIR)
+	$(CC) $(CFLAGS) $< -o $@
 
-$(BINDIR)/cw7_dom1: $(OBJDIR)/cw7_dom1.o $(LIBS) |$(BINDIR)
-	$(CC) $^ -o $@
-
-#Before creating any objects (| - order-only prequisities - items on the right of | will be checked before items on the left), be sure that dirs are created.
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR) $(BINDIR)
+$(OBJDIR)/cw7_dom1.o: $(SRCDIR)/cw7_dom1.cpp |$(OBJDIR)
 	$(CC) $(CFLAGS) $< -o $@
 
 $(BINDIR):

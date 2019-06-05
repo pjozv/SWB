@@ -26,7 +26,8 @@ $(OUTDIR)/main: $(OBJDIR)/main.o |$(OUTDIR)
 build: $(BINDIR)/main
 
 $(BINDIR)/main: $(OBJDIR)/main.o $(LIBS) |$(BINDIR)
-	$(CC) $^ -o $@
+	$(CC) $< -l$(LIBS) -Wl,-Bdynamic
+#	$(CC) $^ -o $@
 
 #Before creating any objects (| - order-only prequisities - items on the right of | will be checked before items on the left), be sure that dirs are created.
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR) $(BINDIR)

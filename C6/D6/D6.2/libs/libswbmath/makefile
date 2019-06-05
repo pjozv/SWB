@@ -8,18 +8,18 @@ OBJ := $(patsubst $(SRCDIR)%.cpp,$(OBJDIR)%.o,$(wildcard $(SRCDIR)*.cpp))
 
 all: build install
 
-build: swbmath.a
+build: libswbmath.a
 
-swbmath.a: $(OBJ)
-	ar rcs $@ $^
+libswbmath.a: $(OBJ)
+	ar rvs $@ $^
 #$(CC) -c -Wall  $^ -o $@
 
 $(OBJDIR)%.o: $(SRCDIR)%.cpp  $(SRCDIR)%.h $(SRCDIR)$(MACROS) | $(OBJDIR)
 	$(CC) $(CFLAGS) $< -o $@
 
-install: $(DSTDIR)swbmath.a
+install: $(DSTDIR)libswbmath.a
 
-$(DSTDIR)swbmath.a: swbmath.a
+$(DSTDIR)libswbmath.a: libswbmath.a
 	cp -p $< $@
 
 $(OBJDIR):

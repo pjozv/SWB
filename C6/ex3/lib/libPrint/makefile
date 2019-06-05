@@ -7,10 +7,10 @@ DSTDIR:=..
 
 all: build install
 
-build: $(OBJDIR)/libPrint.o
+build: $(OBJDIR)/libPrint.o | $(BINDIR)
 	ar rvs $(BINDIR)/libPrint.a $<	
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp %.h
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp %.h | $(OBJDIR)
 	$(CC) $(CFLAGS) $< -o $@
 
 install: $(DSTDIR)/libPrint.a 
@@ -18,6 +18,12 @@ install: $(DSTDIR)/libPrint.a
 $(DSTDIR)/libPrint.a: $(BINDIR)/libPrint.a
 	cp $< $@
 
+$(BINDIR):
+	mkdir -p $(BINDIR)
+
+$(OBJDIR):
+	mkdir -p $(OBJDIR)
+
 clean:
-	rm -f obj/* bin/* ../*.a
+	rm -f -r obj bin ../*.a
 
